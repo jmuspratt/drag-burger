@@ -14,8 +14,8 @@ class DragBurger {
             this.$wrap.removeClass('snapping');
         });
 
-        // create a simple instance
-        var mc = new Hammer(button);
+  
+        let mc = new Hammer(button);
 
         // Tap burger
         mc.on('tap', (event)=>{
