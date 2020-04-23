@@ -41,7 +41,7 @@ class DragBurger {
 
 
             $('.main').css('transform', `translateX(${mainPosX}px)`);
-            $('.button').css('transform', `translate(${buttonPosX}px, ${buttonPosY}px)`);
+            $('.button').css('transform', `translateX(${buttonPosX}px)`);
         });
 
         // Release burger
