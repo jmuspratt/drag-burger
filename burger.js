@@ -33,14 +33,6 @@ class DragBurger {
 
             $('.main').css('transform', `translateX(${mainPosX}px)`);
             $('.button').css('transform', `translateX(${buttonPosX}px)`);
-
-            if (event.isFinal) {
-                // const windowWidth = document.documentElement.clientWidth;
-                // const snapOpenMark = - windowWidth / 2;
-                // const snapOpen = event.deltaX < snapOpenMark;
-                
-                // this.snap(snapOpen, windowWidth);
-            }
         });
 
         // Release burger
@@ -50,7 +42,6 @@ class DragBurger {
             const snapOpen = event.deltaX < snapOpenMark;
             this.snap(snapOpen, windowWidth);
         })
-
     }
 
     snap(snapOpen, windowWidth) {
@@ -76,7 +67,6 @@ class DragBurger {
             this.savedMainX = 0;
             this.menuIsOpen = true;
         }
-
     }
 };
 
