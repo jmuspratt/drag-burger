@@ -23,9 +23,9 @@ p {
 }
 
 button {
-  right: 15px;
+  right: 10px;
   cursor: pointer;
-  top: 10px;
+  bottom: 20px;
   color: rgb(200, 50, 98);
   position: fixed;
   width: 75px;

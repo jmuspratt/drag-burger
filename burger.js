@@ -15,17 +15,16 @@ class DragBurger {
         });
 
         // create a simple instance
-        // by default, it only adds horizontal recognizers
         var mc = new Hammer(button);
 
-        // Tap
+        // Tap burger
         mc.on('tap', (event)=>{
             const windowWidth = document.documentElement.clientWidth;
             this.snap(!this.menuIsOpen, windowWidth);
         });
 
-        // Drag
-        mc.on('pan', (event) => {
+        // Drag burger
+        mc.on('panleft panright', (event) => {
             const moveMain =  1.2 * event.deltaX;
             const moveButton =  event.deltaX;
 
@@ -35,15 +34,23 @@ class DragBurger {
             $('.main').css('transform', `translateX(${mainPosX}px)`);
             $('.button').css('transform', `translateX(${buttonPosX}px)`);
 
-            // Release drag
             if (event.isFinal) {
-                const windowWidth = document.documentElement.clientWidth;
-                const snapOpenMark = - windowWidth / 2;
-                const snapOpen = event.deltaX < snapOpenMark;
+                // const windowWidth = document.documentElement.clientWidth;
+                // const snapOpenMark = - windowWidth / 2;
+                // const snapOpen = event.deltaX < snapOpenMark;
                 
-                this.snap(snapOpen, windowWidth);
+                // this.snap(snapOpen, windowWidth);
             }
         });
+
+        // Release burger
+        mc.on('panend', (event)=>{
+            const windowWidth = document.documentElement.clientWidth;
+            const snapOpenMark = - windowWidth / 2;
+            const snapOpen = event.deltaX < snapOpenMark;
+            this.snap(snapOpen, windowWidth);
+        })
+
     }
 
     snap(snapOpen, windowWidth) {
