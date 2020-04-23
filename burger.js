@@ -22,8 +22,7 @@ class DragBurger {
         var mc = new Hammer(button);
 
         // Tap
-        mc.on('tap click', (event)=>{
-            console.log('tap or click');
+        mc.on('tap', (event)=>{
             const windowWidth = document.documentElement.clientWidth;
             this.snap(!this.menuIsOpen, windowWidth);
         });
