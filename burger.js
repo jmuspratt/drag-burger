@@ -5,7 +5,11 @@ class DragBurger {
         this.$button = $('.button');
         this.$main = $('.main');
 
-        this.savedButtonX = 0;
+        this.savedButtonPos = {
+            x: 0,
+            y: 0,
+        };
+
         this.savedMainX = 0;
         this.menuIsOpen = false;
 
@@ -26,13 +30,18 @@ class DragBurger {
         // Drag burger
         mc.on('panleft panright', (event) => {
             const moveMain =  1.2 * event.deltaX;
-            const moveButton =  event.deltaX;
+            const moveButton =  {
+                x: event.deltaX,
+                y: event.deltaY,
+            };
 
             const mainPosX = moveMain + this.savedMainX <= 0 ? moveMain + this.savedMainX : 0; // don't let it go right of origin
-            const buttonPosX = moveButton + this.savedButtonX;
+            const buttonPosX = moveButton.x + this.savedButtonPos.x;
+            const buttonPosY = moveButton.y + this.savedButtonPos.y;
+
 
             $('.main').css('transform', `translateX(${mainPosX}px)`);
-            $('.button').css('transform', `translateX(${buttonPosX}px)`);
+            $('.button').css('transform', `translate(${buttonPosX}px, ${buttonPosY}px)`);
         });
 
         // Release burger
@@ -52,9 +61,11 @@ class DragBurger {
             console.log('snap open');
             const buttonDestinationX = -(windowWidth - 80);
             const mainDestinationX = -(windowWidth - 30);
-            $('.button').css('transform', 'translateX(' + buttonDestinationX + 'px)');
+            $('.button').css('transform', `translateX(${buttonDestinationX}px)`);
             $('.main').css('transform', 'translateX(' + mainDestinationX + 'px)');
-            this.savedButtonX = buttonDestinationX;
+            this.savedButtonPos.x = buttonDestinationX;
+            this.savedButtonPos.y = buttonDestinationY;
+            
             this.savedMainX = mainDestinationX;
             this.menuIsOpen = true;
         }
@@ -63,7 +74,7 @@ class DragBurger {
             console.log('snap closed');
             $('.button').css('transform', 'translateX(' + 0 + 'px)');
             $('.main').css('transform', 'translateX(' + 0 + 'px)');
-            this.savedButtonX = 0;
+            this.savedButtonPos.y = 0;
             this.savedMainX = 0;
             this.menuIsOpen = true;
         }
